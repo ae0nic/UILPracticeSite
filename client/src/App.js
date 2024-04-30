@@ -7,14 +7,18 @@ import logo from './logo.svg'
 
 export default function App() {
   return (
-    <>
+    <div id='page'>
       <header>
         <div class='logoHeader'>
           <p>Hello world!</p>
         </div>
       </header>
       <div id='separator'></div>
-      <p>Welcome to the site</p>
-    </>
+      <div id='body'>
+        <div id='welcome'>
+          <p>Welcome to the page</p>
+        </div>
+      </div>
+    </div>
   );
 }
