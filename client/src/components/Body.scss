@@ -1,0 +1,44 @@
+@import "../custom.scss";
+
+#body-text Button {
+    background-color: red;
+}
+
+#body-header {
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    font-size: larger;
+    width: 100%;
+}
+
+#body-text {
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#body {
+    background-color: rgb(43, 43, 43);
+    min-height: 100vh;
+    min-width: 100vh;
+    border-radius: 10px;
+    border-width: 3px;
+    border: solid;
+    border-color: white;
+    margin-left: 0;
+    margin-right: 0;
+    align-items: center;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    @media (min-width: 720px)
+    {
+      margin-left: 1vw;
+      margin-right: 1vw;
+    }
+  }
+  

@@ -29,19 +29,3 @@
   margin-top: var(--headerHeight);
 }
 
-#body {
-  background-color: rgb(43, 43, 43);
-  min-height: 100vh;
-  min-width: 100vh;
-  border-radius: 10px;
-  margin-left: 0;
-  margin-right: 0;
-  align-items: center;
-  justify-content: center;
-  display: flexbox;
-  @media (min-width: 720px)
-  {
-    margin-left: 1vw;
-    margin-right: 1vw;
-  }
-}

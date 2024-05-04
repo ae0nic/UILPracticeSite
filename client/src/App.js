@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-
-import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
-import Alert from 'react-bootstrap/Alert';
-import logo from './logo.svg'
+import Body from './components/Body';
 
 export default function App() {
   return (
@@ -14,11 +10,7 @@ export default function App() {
         </div>
       </header>
       <div id='separator'></div>
-      <div id='body'>
-        <div id='welcome'>
-          <p>Welcome to the page</p>
-        </div>
-      </div>
+        <Body/>
     </div>
   );
 }
