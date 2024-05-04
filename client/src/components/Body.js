@@ -2,23 +2,26 @@ import "./Body.scss";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
+import { Children } from "react";
 
-export default function Body()
+export default function Body({children, setResponse})
 {
     let onSubmit = (e) => {
         let form = document.getElementById("questionForm");
         console.log(form.elements.numQuestions.value);
-        fetch(`/api?numQuestions=${form.elements.numQuestions.value}`);
+        fetch(`/api?numQuestions=${form.elements.numQuestions.value}`)
+        .then((res) => res.json())
+        .then((data) => setResponse(data.data));
         e.preventDefault();
     }
 
+    
 
     return (<div id="body">
         <div id="body-header">
             Generate UIL Practice Questions
-            <hr/>
         </div>
+        <hr/>
         <div id="body-text">
             <Form onSubmit={onSubmit} action="/api" id="questionForm">
                 <Form.Check
@@ -46,6 +49,13 @@ export default function Body()
                     Submit
                 </Button>
             </Form>
+        </div>
+        <div id="body-questions">
+            {Children.map(children, child => 
+                <div className="question">
+                    {child}
+                </div>
+            )}
         </div>
     </div>
     );
