@@ -17,10 +17,16 @@ function listQuestions(questions)
     <p> Questions: </p> 
     {Object.keys(questions).map((i) => (
       <div class="Question">
-        <p>Question #{i}:</p>
-        <p>{questions[i]["Question"]}</p>
-        <p>Answer:</p>
-        <p>{questions[i]["Answer"]}</p>
+        <div class="QuestionTitle">
+          <h2>{i}: {questions[i]["Question"]}</h2>
+        </div>
+        <div class="AnswerChoices">
+          <ul>
+            {Object.keys(questions[i]["Choices"]).map(
+              (k) => <li>{Number(k) + 1}: {questions[i]["Choices"][k]}</li>
+            )}
+          </ul>
+        </div>
       </div>
     ))}
     </div>)
