@@ -51,11 +51,7 @@ export default function Body({children, setResponse})
             </Form>
         </div>
         <div id="body-questions">
-            {Children.map(children, child => 
-                <div className="question">
-                    {child}
-                </div>
-            )}
+            {children}
         </div>
     </div>
     );

@@ -5,18 +5,32 @@ function listQuestions(questions)
 {
   if (questions != null)
   {
+    if (!(questions instanceof Object))
+      return <p>The server response could not be parsed</p>;
     if (questions.message != null)
     {
       return <p>The server says: {questions.message}</p>;
     }
     console.log(questions)
-    return (<p> Questions: {Array.from(questions).map(q => <p>Question:{q.Question} </p>)} </p>)
+    return ( 
+    <div class="QuestionList">
+    <p> Questions: </p> 
+    {Object.keys(questions).map((i) => (
+      <div class="Question">
+        <p>Question #{i}:</p>
+        <p>{questions[i]["Question"]}</p>
+        <p>Answer:</p>
+        <p>{questions[i]["Answer"]}</p>
+      </div>
+    ))}
+    </div>)
   }
   return <p>Generate some questions!</p>;
 }
 
 export default function App() {
   const [questionResponse, setQuestionResponse] = React.useState(null);
+  console.log(listQuestions(questionResponse))
   return (
     <div id='page'>
       <header>
