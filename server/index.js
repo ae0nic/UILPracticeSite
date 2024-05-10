@@ -20,7 +20,13 @@ function generateResponse(questions)
     {
       data[i] = {};
       data[i]["Question"] = "What is the answer to life?";
-      data[i]["Answer"] = Math.floor(Math.random() * 40 + 10);
+      data[i]["Choices"] = {};
+      data[i]["Choices"][0] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10);
+      data[i]["Choices"][1] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10);
+      data[i]["Choices"][2] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10);
+      data[i]["Choices"][3] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10);
+      data[i]["CorrectChoice"] = Math.floor(Math.random() * 4);
+      
     }
     toReturn["data"] = data;
   }
