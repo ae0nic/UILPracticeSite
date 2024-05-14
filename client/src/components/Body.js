@@ -15,6 +15,11 @@ export default function Body({children, setResponse})
         e.preventDefault();
     }
 
+    let onChange = (e) => {
+        let indicator = document.getElementById("indicator");
+        indicator.textContent = "Generating " + e.target.value + " questions";
+    }
+
     
 
     return (<div id="body">
@@ -24,27 +29,8 @@ export default function Body({children, setResponse})
         <hr/>
         <div id="body-text">
             <Form onSubmit={onSubmit} action="/api" id="questionForm">
-                <Form.Check
-                    value={1}
-                    type="radio"
-                    name="numQuestions"
-                    label="1 question"/>
-                <Form.Check
-                    value={5}
-                    type="radio"
-                    name="numQuestions"
-                    label="5 questions"/>
-                <Form.Check
-                    defaultChecked
-                    value={10}
-                    type="radio"
-                    name="numQuestions"
-                    label="10 questions"/>
-                <Form.Check
-                    value={20}
-                    type="radio"
-                    name="numQuestions"
-                    label="20 questions"/>
+                <Form.Label id="indicator">Generating 25 questions</Form.Label>
+                <Form.Range onChange={onChange} min={1} max={50} defaultValue={25} name="numQuestions"/>
                 <Button type="submit">
                     Generate
                 </Button>
