@@ -1,5 +1,12 @@
 @import "custom";
 
+#questionSubmitButton {
+  background-color: green;
+  margin-bottom: 3vh;
+  margin-top: 3vh;
+  width:100%;
+}
+
 :root {
   --headerHeight: 100vh;
   --headerWidth: 100vw;

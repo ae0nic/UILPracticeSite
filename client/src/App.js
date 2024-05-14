@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Body from './components/Body';
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button';
 
 function listQuestions(questions)
 {
@@ -12,22 +14,31 @@ function listQuestions(questions)
       return <p>The server says: {questions.message}</p>;
     }
     console.log(questions)
+
+    let formSubmit = (e) => {
+      console.log(e);
+    }
+
     return ( 
     <div class="QuestionList">
-      {Object.keys(questions).map((i) => (
-        <div class="Question">
-          <div class="QuestionTitle">
-            <h2>{i}: {questions[i]["Question"]}</h2>
+      <Form onSubmit={formSubmit}>
+          {Object.keys(questions).map((i) => (
+            <div class="Question">
+              <div class="QuestionTitle">
+                <h2>{i}: {questions[i]["Question"]}</h2>
+              </div>
+              <div class="AnswerChoices">
+                {Object.keys(questions[i]["Choices"]).map(
+                  (k) => <Form.Check 
+                  type="radio" 
+                  label={questions[i]["Choices"][k]} 
+                  name={"question" + i}/>
+                )}
+              </div>
           </div>
-          <div class="AnswerChoices">
-            <ul>
-              {Object.keys(questions[i]["Choices"]).map(
-                (k) => <li>{Number(k) + 1}: {questions[i]["Choices"][k]}</li>
-              )}
-            </ul>
-          </div>
-      </div>
-    ))}
+        ))}
+        <Button type="submit" id="questionSubmitButton">Submit</Button>
+      </Form>
     </div>)
   }
   return <p>Generate some questions!</p>;
