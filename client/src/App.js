@@ -14,19 +14,18 @@ function listQuestions(questions)
     console.log(questions)
     return ( 
     <div class="QuestionList">
-    <p> Questions: </p> 
-    {Object.keys(questions).map((i) => (
-      <div class="Question">
-        <div class="QuestionTitle">
-          <h2>{i}: {questions[i]["Question"]}</h2>
-        </div>
-        <div class="AnswerChoices">
-          <ul>
-            {Object.keys(questions[i]["Choices"]).map(
-              (k) => <li>{Number(k) + 1}: {questions[i]["Choices"][k]}</li>
-            )}
-          </ul>
-        </div>
+      {Object.keys(questions).map((i) => (
+        <div class="Question">
+          <div class="QuestionTitle">
+            <h2>{i}: {questions[i]["Question"]}</h2>
+          </div>
+          <div class="AnswerChoices">
+            <ul>
+              {Object.keys(questions[i]["Choices"]).map(
+                (k) => <li>{Number(k) + 1}: {questions[i]["Choices"][k]}</li>
+              )}
+            </ul>
+          </div>
       </div>
     ))}
     </div>)
