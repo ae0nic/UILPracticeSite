@@ -46,13 +46,12 @@ export default function Body({children, setResponse})
                     name="numQuestions"
                     label="20 questions"/>
                 <Button type="submit">
-                    Submit
+                    Generate
                 </Button>
             </Form>
         </div>
-        <div id="body-questions">
-            {children}
-        </div>
+        
+        {children}
     </div>
     );
 }
