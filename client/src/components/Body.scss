@@ -1,15 +1,14 @@
 @import "../custom.scss";
 
-.choice {
-    color: yellow;
+
+
+  
+.incorrectChoice > input:disabled {
+    background-color: red;
 }
 
-.disabled.correctChoice {
-    color: green;
-  }
-  
-.disabled.incorrectChoice {
-color: red;
+.correctChoice > input:disabled {
+    background-color: green;
 }
 
 .QuestionList {

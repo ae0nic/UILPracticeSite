@@ -11,6 +11,12 @@ export default function Body({children, setResponse})
         fetch(`/api/generateQuestions?numQuestions=${form.elements.numQuestions.value}`)
         .then((res) => res.json())
         .then((data) => setResponse(data.data));
+        let choices = Array.prototype.slice.call(document.getElementsByClassName("choice"));
+        for (let i = 0; i < choices.length; i++)
+        {
+            choices[i].children[0].disabled = false;
+            choices[i].children[0].checked = false;
+        }
         e.preventDefault();
 
     }
