@@ -33,7 +33,7 @@ function generateResponse(questions)
   return toReturn;
 }
 
-app.get("/api", (req, res) => {
+app.get("/api/generateQuestions", (req, res) => {
     let numQuestions = req.query.numQuestions;
     res.json(generateResponse(numQuestions));
     

@@ -8,8 +8,7 @@ export default function Body({children, setResponse})
 {
     let onSubmit = (e) => {
         let form = document.getElementById("questionForm");
-        console.log(form.elements.numQuestions.value);
-        fetch(`/api?numQuestions=${form.elements.numQuestions.value}`)
+        fetch(`/api/generateQuestions?numQuestions=${form.elements.numQuestions.value}`)
         .then((res) => res.json())
         .then((data) => setResponse(data.data));
         e.preventDefault();
@@ -28,7 +27,7 @@ export default function Body({children, setResponse})
         </div>
         <hr/>
         <div id="body-text">
-            <Form onSubmit={onSubmit} action="/api" id="questionForm">
+            <Form onSubmit={onSubmit} id="questionForm">
                 <Form.Label id="indicator">Generating 25 questions</Form.Label>
                 <Form.Range onChange={onChange} min={1} max={50} defaultValue={25} name="numQuestions"/>
                 <Button type="submit">

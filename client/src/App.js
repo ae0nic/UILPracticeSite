@@ -13,10 +13,10 @@ function listQuestions(questions)
     {
       return <p>The server says: {questions.message}</p>;
     }
-    console.log(questions)
 
     let formSubmit = (e) => {
-      console.log(e);
+      e.preventDefault();
+      console.log(document.getElementsByClassName("correctChoice"));
     }
 
     return ( 
@@ -32,7 +32,9 @@ function listQuestions(questions)
                   (k) => <Form.Check 
                   type="radio" 
                   label={questions[i]["Choices"][k]} 
-                  name={"question" + i}/>
+                  name={"question" + i}
+                  className={questions[i]["CorrectChoice"] == k ? "correctChoice" : ""}
+                  />
                 )}
               </div>
           </div>
@@ -46,7 +48,6 @@ function listQuestions(questions)
 
 export default function App() {
   const [questionResponse, setQuestionResponse] = React.useState(null);
-  console.log(listQuestions(questionResponse))
   return (
     <div id='page'>
       <header>
