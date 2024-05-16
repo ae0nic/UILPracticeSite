@@ -26,15 +26,15 @@ function generateResponse(questions)
         let operator = (Math.random() < 0.5) ? " sum " : " product ";
 
         let answer = (operator === " sum ") ? num1 + num2 : num1 * num2;
-        data[i]["Question"] = `What is the ${operator} of ${num1.toString(16)} and ${num2.toString(16)}?`;
+        data[i]["Question"] = `What is the ${operator} of ${num1.toString(16)}₁₆ and ${num2.toString(16)}₁₆?`;
         data[i]["CorrectChoice"] = Math.floor(Math.random() * 4);
         data[i]["Choices"] = {};
-        data[i]["Choices"][0] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10);
-        data[i]["Choices"][1] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10);
-        data[i]["Choices"][2] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10);
-        data[i]["Choices"][3] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10);
+        data[i]["Choices"][0] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10) + "₁₀";
+        data[i]["Choices"][1] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10) + "₁₀";
+        data[i]["Choices"][2] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10) + "₁₀";
+        data[i]["Choices"][3] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10) + "₁₀";
 
-        data[i]["Choices"][data[i]["CorrectChoice"]] = answer;
+        data[i]["Choices"][data[i]["CorrectChoice"]] = answer + "₁₀";
         
       }
       toReturn["data"] = data;
