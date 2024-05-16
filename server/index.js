@@ -10,27 +10,40 @@ app.use(express.urlencoded({ extended: true }));
 function generateResponse(questions)
 {
   let toReturn = {};
-  if (isNaN(questions) || Number(questions) < 1)
-  {
-    toReturn["data"] = {"message": "Invalid input!"}
-  } else {
-    let numQuestions = Number(questions);
-    let data = {};
-    for (let i = 1; i <= numQuestions; i++)
+  try {
+    if (isNaN(questions) || Number(questions) < 1)
     {
-      data[i] = {};
-      data[i]["Question"] = "What is the answer to life?";
-      data[i]["Choices"] = {};
-      data[i]["Choices"][0] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10);
-      data[i]["Choices"][1] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10);
-      data[i]["Choices"][2] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10);
-      data[i]["Choices"][3] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10);
-      data[i]["CorrectChoice"] = Math.floor(Math.random() * 4);
-      
+      toReturn["data"] = {"message": "Invalid input!"}
+    } else {
+      let numQuestions = Number(questions);
+      let data = {};
+      for (let i = 1; i <= numQuestions; i++)
+      {
+        
+        data[i] = {};
+        let num1 = Math.floor(Math.random() * 20 + 20);
+        let num2 =  Math.floor(Math.random() * 20 + 20);
+        let operator = (Math.random() < 0.5) ? " sum " : " product ";
+
+        let answer = (operator === " sum ") ? num1 + num2 : num1 * num2;
+        data[i]["Question"] = `What is the ${operator} of ${num1.toString(16)} and ${num2.toString(16)}?`;
+        data[i]["CorrectChoice"] = Math.floor(Math.random() * 4);
+        data[i]["Choices"] = {};
+        data[i]["Choices"][0] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10);
+        data[i]["Choices"][1] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10);
+        data[i]["Choices"][2] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10);
+        data[i]["Choices"][3] = data[i]["Answer"] = Math.floor(Math.random() * 40 + 10);
+
+        data[i]["Choices"][data[i]["CorrectChoice"]] = answer;
+        
+      }
+      toReturn["data"] = data;
     }
-    toReturn["data"] = data;
+  } catch {
+    toReturn["data"] = {"message": "The server threw an error!"}
+  } finally {
+    return toReturn;
   }
-  return toReturn;
 }
 
 app.get("/api/generateQuestions", (req, res) => {
