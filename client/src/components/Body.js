@@ -12,6 +12,7 @@ export default function Body({children, setResponse})
         .then((res) => res.json())
         .then((data) => setResponse(data.data));
         e.preventDefault();
+
     }
 
     let onChange = (e) => {

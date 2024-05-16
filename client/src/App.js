@@ -16,7 +16,14 @@ function listQuestions(questions)
 
     let formSubmit = (e) => {
       e.preventDefault();
-      console.log(document.getElementsByClassName("correctChoice"));
+      var allChoices = document.getElementsByClassName("choice");
+      for (var i = 0; i < allChoices.length; i++)
+      {
+        allChoices[i].children[0].class += " disabled";
+        allChoices[i].children[0].disabled = true;
+        if (allChoices[i].children[0].checked)
+          allChoices[i].className += " checked";
+      }
     }
 
     return ( 
@@ -33,7 +40,8 @@ function listQuestions(questions)
                   type="radio" 
                   label={questions[i]["Choices"][k]} 
                   name={"question" + i}
-                  className={questions[i]["CorrectChoice"] == k ? "correctChoice" : ""}
+                  className={ "choice " + (questions[i]["CorrectChoice"] == k ? "correctChoice" : "incorrectChoice")}
+                  disabled={false}
                   />
                 )}
               </div>

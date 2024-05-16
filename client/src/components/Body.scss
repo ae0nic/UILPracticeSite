@@ -1,5 +1,13 @@
 @import "../custom.scss";
 
+.disabled.correctChoice {
+    color: green;
+  }
+  
+.disabled.incorrectChoice {
+color: red;
+}
+
 .QuestionList {
     display:flex;
     justify-content: center;
