@@ -61,7 +61,7 @@ export default function App() {
       <header>
         <div class='header'>
           <h1>UIL Practice Site</h1>
-          <small>By _ae0nic</small>
+          <small>By ben lol</small>
         </div>
       </header>
       <div id='separator'></div>
