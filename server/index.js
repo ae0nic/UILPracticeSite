@@ -45,6 +45,65 @@ function generateBaseMathQuestion()
   return question;
 }
 
+function recursiveBooleanLogicGenerator(remainingParenthesis)
+{
+  let booleanOperators = [
+    [" && ", (in1, in2) => in1 && in2],
+    [" || ", (in1, in2) => in1 || in2],
+    [" ^ ", (in1, in2) => in1 ^ in2]];
+  let fullOperandList = ["t", "f", "x"];
+  let operandList = fullOperandList;
+
+  let operand1;
+  let random = Math.random();
+  if (random > 0.8 && remainingParenthesis > 0)
+  {
+    operand1 = "("+recursiveBooleanLogicGenerator(remainingParenthesis-1)+")";
+  } else {
+    let operandNumber = Math.floor(Math.random * operandList.length);
+    operand1 = operandList.splice(operandNumber, 1);
+  }
+
+  let [operator,_] = booleanOperators[Math.floor(Math.random() * booleanOperators.length)];
+
+  let operand2;
+  random = Math.random();
+  if (random > 0.8 && remainingParenthesis > 0)
+  {
+    operand2 = "("+recursiveBooleanLogicGenerator(remainingParenthesis-1)+")";
+  } else {
+    let operandNumber = Math.floor(Math.random * operandList.length);
+    operand2 = operandList.splice(operandNumber, 1);
+  }
+
+  return operand1 + operator + operand2;
+
+
+}
+
+function generateBooleanLogicQuestion()
+{
+  
+  let booleanOperators = [
+    [" && ", (in1, in2) => in1 && in2],
+    [" || ", (in1, in2) => in1 || in2],
+    [" ^ ", (in1, in2) => in1 ^ in2]];
+  let question = {};
+  question["Question"] = "What is the output of the following code block?"
+  question["CodeBlock"] = "boolean t = true;\nboolean f = false;\n"
+  let t = true;
+  let f = false;
+  let [operatorText, operatorLambda] = booleanOperators[Math.floor(Math.random() * booleanOperators.length)];
+  question["CodeBlock"] += `boolean x = t ${operatorText} f;\n`;
+  let x = operatorLambda(t, f);
+  
+  let operatorCount = Math.floor(Math.random() * 3 + 5);
+  let maxParenthesis = operatorCount - 3;
+  console.log(recursiveBooleanLogicGenerator(maxParenthesis));
+  
+  return question;
+}
+
 function generateResponse(questions)
 {
   let toReturn = {};
@@ -57,7 +116,7 @@ function generateResponse(questions)
       let data = {};
       for (let i = 1; i <= numQuestions; i++)
       {
-        
+        generateBooleanLogicQuestion();
         data[i] = generateBaseMathQuestion();
         
       }
