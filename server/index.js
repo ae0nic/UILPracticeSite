@@ -45,41 +45,55 @@ function generateBaseMathQuestion()
   return question;
 }
 
-function recursiveBooleanLogicGenerator(remainingParenthesis)
+function recursiveBooleanLogicGenerator(remainingParenthesis, xValue)
 {
-  let booleanOperators = [
-    [" && ", (in1, in2) => in1 && in2],
-    [" || ", (in1, in2) => in1 || in2],
-    [" ^ ", (in1, in2) => in1 ^ in2]];
-  let fullOperandList = ["t", "f", "x"];
-  let operandList = fullOperandList;
-
-  let operand1;
-  let random = Math.random();
-  if (random > 0.8 && remainingParenthesis > 0)
-  {
-    operand1 = "("+recursiveBooleanLogicGenerator(remainingParenthesis-1)+")";
-  } else {
-    let operandNumber = Math.floor(Math.random * operandList.length);
-    operand1 = operandList.splice(operandNumber, 1);
-  }
-
-  let [operator,_] = booleanOperators[Math.floor(Math.random() * booleanOperators.length)];
-
-  let operand2;
-  random = Math.random();
-  if (random > 0.8 && remainingParenthesis > 0)
-  {
-    operand2 = "("+recursiveBooleanLogicGenerator(remainingParenthesis-1)+")";
-  } else {
-    let operandNumber = Math.floor(Math.random * operandList.length);
-    operand2 = operandList.splice(operandNumber, 1);
-  }
-
-  return operand1 + operator + operand2;
-
-
+    let booleanOperators = [
+      [" && ", (in1, in2) => in1 && in2],
+      [" || ", (in1, in2) => in1 || in2],
+      [" ^ ", (in1, in2) => in1 != in2]];
+    let fullOperandList = [["t", true], ["f", false], ["x", xValue]];
+    let operandList = fullOperandList;
+    
+    let operand1Text, result1;
+    let random = Math.random();
+    if ( (random > 0.7 && remainingParenthesis > 0) || remainingParenthesis > 2)
+    {
+      [operand1Text, result1] = recursiveBooleanLogicGenerator(remainingParenthesis-1, xValue);
+      operand1Text = "("+operand1Text+")";
+    } else {
+      let operandNumber = Math.floor(Math.random() * operandList.length);
+      [operand1Text, result1] = operandList.splice(operandNumber, 1)[0];
+    }
+    if (Math.random() > 0.3)
+    {
+      operand1Text = "!" + operand1Text;
+      result1 = !result1;
+    }
+    
+    let [operator, operatorLambda] = booleanOperators[Math.floor(Math.random() * booleanOperators.length)];
+    
+    let operand2Text, result2;
+    random = Math.random();
+    if (random > 0.8 && remainingParenthesis > 0)
+    {
+      [operand2Text, result2] = recursiveBooleanLogicGenerator(remainingParenthesis-1, xValue);
+      operand2Text = "("+operand2Text+")";
+    } else {
+      let operandNumber = Math.floor(Math.random() * operandList.length);
+      [operand2Text, result2] = operandList.splice(operandNumber, 1)[0];
+    }
+    if (Math.random() > 0.65)
+    {
+      operand2Text = "!" + operand2Text;
+      result2 = !result2;
+    }
+  
+  return [ (operand1Text + operator + operand2Text), operatorLambda(result1, result2)];
+  
+  
 }
+
+
 
 function generateBooleanLogicQuestion()
 {
@@ -87,7 +101,7 @@ function generateBooleanLogicQuestion()
   let booleanOperators = [
     [" && ", (in1, in2) => in1 && in2],
     [" || ", (in1, in2) => in1 || in2],
-    [" ^ ", (in1, in2) => in1 ^ in2]];
+    [" ^ ", (in1, in2) => in1 != in2]];
   let question = {};
   question["Question"] = "What is the output of the following code block?"
   question["CodeBlock"] = "boolean t = true;\nboolean f = false;\n"
@@ -97,10 +111,13 @@ function generateBooleanLogicQuestion()
   question["CodeBlock"] += `boolean x = t ${operatorText} f;\n`;
   let x = operatorLambda(t, f);
   
-  let operatorCount = Math.floor(Math.random() * 3 + 5);
-  let maxParenthesis = operatorCount - 3;
-  console.log(recursiveBooleanLogicGenerator(maxParenthesis));
+  let depth = 3;
   
+  let [text, result] = recursiveBooleanLogicGenerator(depth, x);
+  question["CodeBlock"] += "out.println(text);";
+  question["Choices"] = {0: "true", 1: "false"};
+  question["CorrectChoice"] = (result == true) ? 0 : 1;
+ 
   return question;
 }
 
@@ -116,8 +133,8 @@ function generateResponse(questions)
       let data = {};
       for (let i = 1; i <= numQuestions; i++)
       {
-        generateBooleanLogicQuestion();
-        data[i] = generateBaseMathQuestion();
+        data[i] = generateBooleanLogicQuestion();
+        // data[i] = generateBaseMathQuestion();
         
       }
       toReturn["data"] = data;
