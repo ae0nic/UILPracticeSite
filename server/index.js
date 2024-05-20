@@ -114,7 +114,7 @@ function generateBooleanLogicQuestion()
   let depth = 3;
   
   let [text, result] = recursiveBooleanLogicGenerator(depth, x);
-  question["CodeBlock"] += "out.println(text);";
+  question["CodeBlock"] += `out.println(${text});`;
   question["Choices"] = {0: "true", 1: "false"};
   question["CorrectChoice"] = (result == true) ? 0 : 1;
  

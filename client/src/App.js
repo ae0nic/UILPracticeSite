@@ -3,6 +3,19 @@ import Body from './components/Body';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
 
+function displayCodeBlock(question)
+{
+  if (question["CodeBlock"] == null)
+    return;
+  return <div class="CodeBlock">
+    <pre>
+      <code>
+        {question["CodeBlock"]}
+      </code>
+    </pre>
+  </div>;
+}
+
 function listQuestions(questions)
 {
   if (questions != null)
@@ -34,6 +47,7 @@ function listQuestions(questions)
               <div class="QuestionTitle">
                 <h2>{i}: {questions[i]["Question"]}</h2>
               </div>
+              {displayCodeBlock(questions[i])}
               <div class="AnswerChoices">
                 {Object.keys(questions[i]["Choices"]).map(
                   (k) => <Form.Check 
