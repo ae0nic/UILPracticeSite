@@ -1,13 +1,4 @@
-@import "custom";
-
-#questionSubmitButton {
-  background-color: green;
-  margin-bottom: 3vh;
-  margin-top: 3vh;
-  width:100%;
-}
-
-
+@import "./custom.scss";
 
 :root {
   --headerHeight: 100vh;

@@ -1,4 +1,4 @@
-import "./Body.scss";
+import "./GeneratedTest.scss";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -7,7 +7,7 @@ import { Children } from "react";
 export default function Body({children, setResponse})
 {
     let onSubmit = (e) => {
-        let form = document.getElementById("questionForm");
+        let form = document.getElementById("question-form");
         fetch(`/api/generateQuestions?numQuestions=${form.elements.numQuestions.value}`)
         .then((res) => res.json())
         .then((data) => setResponse(data.data));
@@ -34,7 +34,7 @@ export default function Body({children, setResponse})
         </div>
         <hr/>
         <div id="body-text">
-            <Form onSubmit={onSubmit} id="questionForm">
+            <Form onSubmit={onSubmit} id="question-form">
                 <Form.Label id="indicator">Generating 25 questions</Form.Label>
                 <Form.Range onChange={onChange} min={1} max={50} defaultValue={25} name="numQuestions"/>
                 <Button type="submit">

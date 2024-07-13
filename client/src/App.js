@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
-import Body from './components/Body';
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button';
+import React from 'react';
+import GeneratedTest from './components/GeneratedTest';
 import QuestionList from './components/QuestionList';
+import NavigationRow from './components/NavigationRow';
+
+
+/* TODO:
+** Link to real tests
+** Polish site
+*/
 
 function displayBody(questions)
 {
@@ -28,12 +33,14 @@ export default function App() {
         <div class='header'>
           <h1>UIL Practice Site</h1>
           <small>By ben lol</small>
+          <NavigationRow/>
         </div>
       </header>
+      
       <div id='separator'></div>
-        <Body setResponse={setQuestionResponse}>
+        <GeneratedTest setResponse={setQuestionResponse}>
           {displayBody(questionResponse)}
-        </Body>
+        </GeneratedTest>
     </div>
   );
 }

@@ -3,15 +3,15 @@
 
 
   
-.incorrectChoice > input:disabled {
+.incorrect-choice > input:disabled {
     background-color: red;
 }
 
-.correctChoice > input:disabled {
+.correct-choice > input:disabled {
     background-color: green;
 }
 
-.QuestionList {
+.question-list {
     display:flex;
     justify-content: center;
     align-items: center;
@@ -23,6 +23,13 @@
     margin-bottom: 1vmin;
     min-width: 90%;
 }
+
+#question-submit-button {
+    background-color: green;
+    margin-bottom: 3vh;
+    margin-top: 3vh;
+    width:100%;
+  }
 
 #body-text Button {
     background-color: green;

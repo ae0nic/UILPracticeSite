@@ -1,3 +1,11 @@
+/* TODO:
+** Add more generators
+**    - Math generator
+**    - Data structure link generator
+** Fix bugs
+*/ 
+
+
 const generators = require("./generators.js")
 
 const express = require("express");

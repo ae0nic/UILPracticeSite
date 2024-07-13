@@ -31,28 +31,28 @@ function displayCodeBlock(question)
 export default function QuestionList({questions})
 {
     return (
-    <div class="QuestionList">
+    <div class="question-list">
         <Form onSubmit={formSubmit}>
             {Object.keys(questions).map((i) => (
-                <div class="Question">
-                <div class="QuestionTitle">
+                <div class="question">
+                <div class="question-title">
                     <h2>{i}: {questions[i]["Question"]}</h2>
                 </div>
                 {displayCodeBlock(questions[i])}
-                <div class="AnswerChoices">
+                <div class="answer-choices">
                     {Object.keys(questions[i]["Choices"]).map(
                     (k) => <Form.Check 
                     type="radio" 
                     label={questions[i]["Choices"][k]} 
                     name={"question" + i}
-                    className={ "choice " + (questions[i]["CorrectChoice"] == k ? "correctChoice" : "incorrectChoice")}
+                    className={ "choice " + (questions[i]["CorrectChoice"] == k ? "correct-choice" : "incorrect-choice")}
                     disabled={false}
                     />
                     )}
                 </div>
             </div>
             ))}
-            <Button type="submit" id="questionSubmitButton">Submit</Button>
+            <Button type="submit" id="question-submit-button">Submit</Button>
         </Form>
     </div>);
 }
