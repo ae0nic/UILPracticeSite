@@ -1,3 +1,7 @@
-div#nav-row .btn {
-    
+div#nav-row label {
+    background-color: green;
+}
+
+div#nav-row :checked+label {
+    background-color: darkgreen;
 }

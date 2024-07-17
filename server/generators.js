@@ -1,3 +1,6 @@
+const Parser = require('expr-eval').Parser;
+const parser = new Parser();
+
 module.exports = {
     generateBaseMathQuestion: function generateBaseMathQuestion()
         {
@@ -56,10 +59,56 @@ module.exports = {
         let depth = 3;
         
         let [text, result] = recursiveBooleanLogicGenerator(depth, x);
-        question["CodeBlock"] += `out.println(${text});`;
+        question["CodeBlock"] += `out.print(${text});`;
         question["Choices"] = {0: "true", 1: "false"};
         question["CorrectChoice"] = (result == true) ? 0 : 1;
         
+        return question;
+    },
+
+    generateMathQuestion: function generateMathQuestion() {
+        const operators = [
+            ["{x} + {y}", "{x} + {y}"],
+            ["{x} - {y}", "{x} - {y}"],
+            ["{x} * {y}", "{x} * {y}"],
+            ["{x} / {y}", "trunc({x} / {y})"],
+            ["{x} % {y}", "{x} % {y}"]];
+
+        let question = {};
+        question["Question"] = "What is the output of the following code block?"
+        
+        let expressions = [];
+        let length = Math.floor(Math.random() * 2 + 4);
+        for (let i = 0; i < length; i++) {
+            let [displayedOperation, computedOperation] = operators[Math.floor(Math.random() * operators.length)];
+            let op1 = Math.floor(Math.random() * 20 + 5);
+            let op2 = Math.floor(Math.random() * 20 + 5);
+            displayedOperation = displayedOperation.replace("{x}", op1).replace("{y}", op2);
+            computedOperation = computedOperation.replace("{x}", op1).replace("{y}", op2);
+            expressions.push([displayedOperation, computedOperation]);
+        }
+        let [displayedExpression, computedExpression] = ["", ""];
+        expressions.forEach((r, i) => {
+            let op = (Math.floor(Math.random() * 2) == 0) ? " + " : " - "
+
+            displayedExpression += r[0] + op
+            computedExpression += r[1] + op
+        });
+        displayedExpression = displayedExpression.slice(0, -3);
+        computedExpression = computedExpression.slice(0, -3);
+        let answer = parser.evaluate(computedExpression);
+        
+        question["CodeBlock"] = `out.println(${displayedExpression})`;
+        question["Choices"] = {};
+        for (let i = 0; i < 4; i++)
+        {
+            let sign = (Math.round(Math.random()) == 0 ? 1 : -1);
+            question["Choices"][i] = (Math.floor(Math.random() * 20 + 20 * sign) + answer).toString();
+        }
+        let correctChoice = Math.floor(Math.random() * 4);
+        question["CorrectChoice"] = correctChoice;
+        question["Choices"][correctChoice] = answer;
+
         return question;
     }
 }

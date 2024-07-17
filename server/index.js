@@ -29,8 +29,9 @@ function generateResponse(questions)
       let data = {};
       for (let i = 1; i <= numQuestions; i++)
       {
-        data[i] = generators.generateBooleanLogicQuestion();
-        // data[i] = generateBaseMathQuestion();
+        // data[i] = generators.generateBooleanLogicQuestion();
+        // data[i] = generatorsgenerateBaseMathQuestion();
+        data[i] = generators.generateMathQuestion();
         
       }
       toReturn["data"] = data;
