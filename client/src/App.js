@@ -2,7 +2,7 @@ import React from 'react';
 import GeneratedTest from './components/GeneratedTest';
 import QuestionList from './components/QuestionList';
 import NavigationRow from './components/NavigationRow';
-
+import { useState } from 'react';
 
 /* TODO:
 ** Link to real tests
@@ -27,20 +27,26 @@ function displayBody(questions)
 
 export default function App() {
   const [questionResponse, setQuestionResponse] = React.useState(null);
+  const [operationState, setOperationState] = React.useState("generate");
+  const generateElement = (
+  <GeneratedTest setResponse={setQuestionResponse}>
+    {displayBody(questionResponse)}
+  </GeneratedTest>);
+  const viewElement = (<></>);
   return (
     <div id='page'>
       <header>
         <div class='header'>
           <h1>UIL Practice Site</h1>
           <small>By ben lol</small>
-          <NavigationRow/>
+          <NavigationRow setOperationState={setOperationState}/>
         </div>
       </header>
       
       <div id='separator'></div>
-        <GeneratedTest setResponse={setQuestionResponse}>
-          {displayBody(questionResponse)}
-        </GeneratedTest>
+      <div id='content-container'>
+        {operationState == "generate" ? generateElement : <h1>Tests</h1>}
+      </div>
     </div>
   );
 }
