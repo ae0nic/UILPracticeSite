@@ -10,6 +10,39 @@ export default function PastTests() {
             View Past UIL Tests
         </div>
         <hr/>
-        <h3>Tests here!</h3>
+        <div id="body-text">
+            <div className='test'>
+                <h3>Test 1</h3>
+                <p>Test 1 info</p>
+            </div>
+            <div className='test'>
+                <h3>Test 2</h3>
+                <p>Test 2 info</p>
+            </div>
+            <div className='test'>
+                <h3>Test 3</h3>
+                <p>Test 3 info</p>
+            </div>
+            <div className='test'>
+                <h3>Test 4</h3>
+                <p>Test 4 info</p>
+            </div>
+            <div className='test'>
+                <h3>Test 4</h3>
+                <p>Test 4 info</p>
+            </div>
+            <div className='test'>
+                <h3>Test 4</h3>
+                <p>Test 4 info</p>
+            </div>
+            <div className='test'>
+                <h3>Test 4</h3>
+                <p>Test 4 info</p>
+            </div>
+            <div className='test'>
+                <h3>Test 4</h3>
+                <p>Test 4 info</p>
+            </div>
+        </div>
     </div>);
 }
