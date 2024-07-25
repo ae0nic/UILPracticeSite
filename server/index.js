@@ -5,8 +5,12 @@
 ** Fix bugs
 */ 
 
+const path = require("node:path");
+const fs = require("node:fs");
+const testFolderPath = path.join(__dirname, "tests");
+const testFolder =fs.readdirSync(testFolderPath);
 
-const generators = require("./generators.js")
+const generators = require("./generators.js");
 
 const express = require("express");
 
@@ -47,7 +51,16 @@ function generateResponse(questions)
 app.get("/api/generateQuestions", (req, res) => {
     let numQuestions = req.query.numQuestions;
     res.json(generateResponse(numQuestions));
-    
+})
+
+app.get("/api/getTests", (req, res) => {
+  let response = {};
+  for (const file of testFolder) {
+    let filePath = path.join(testFolderPath, file);
+    response[file] = fs.readFileSync(filePath).toString();
+  }
+  console.log(response);
+  res.json(response);
 })
 
 app.listen(PORT, () => {
