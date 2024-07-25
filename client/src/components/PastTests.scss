@@ -15,16 +15,44 @@ hr {
     min-height:3vh;
 }
 
-#body-text {
-    align-items: center;
-    align-content: center;
-    justify-items: center;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+#body-text.past-test-container{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    gap: 1vw;
+    min-width: 100%;
+    padding: 1vh 1vw;
+    
 }
 
+@media (max-width: 1200px) {
+    #body-text {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+    }
+}
+
+@media (max-width: 800px) {
+    #body-text {
+        display: grid;
+        grid-template-columns: auto auto auto;
+    }
+}
+
+@media (max-width: 600px) {
+    #body-text {
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+}
+
+#body-text .test {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    min-width: 100%;
+    padding: 20%;
+    font-size: 30px;
+    text-align: center;
+}
 
 
 #body {

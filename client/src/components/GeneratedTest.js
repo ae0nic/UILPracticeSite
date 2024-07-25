@@ -33,7 +33,7 @@ export default function Body({children, setResponse})
             Generate UIL Practice Questions
         </div>
         <hr/>
-        <div id="body-text">
+        <div id="body-text" className="generated-test-container">
             <Form onSubmit={onSubmit} id="question-form">
                 <Form.Label id="indicator">Generating 25 questions</Form.Label>
                 <Form.Range onChange={onChange} min={1} max={50} defaultValue={25} name="numQuestions"/>
