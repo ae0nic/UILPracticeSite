@@ -10,7 +10,7 @@ export default function PastTests() {
             View Past UIL Tests
         </div>
         <hr/>
-        <div id="body-text" className='past-test-container'>
+        <div id="body-text">
             <div className='test'>
                 <h3>Test 1</h3>
                 <p>Test 1 info</p>
