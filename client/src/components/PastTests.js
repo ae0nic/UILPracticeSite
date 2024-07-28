@@ -1,9 +1,15 @@
 import { useEffect } from 'react';
 import './PastTests.scss';
+import { useState } from 'react';
 
 export default function PastTests() {
+    const [testState, setTestState] = useState([]);
     useEffect(() => {
-        // call the api
+        fetch(`/api/getTests`)
+            .then((res) => res.json())
+            .then((parsed) => {
+                setTestState(parsed);
+            });
     });
     return (<div id="body">
         <div id="body-header">
@@ -11,38 +17,14 @@ export default function PastTests() {
         </div>
         <hr/>
         <div id="body-text">
-            <div className='test'>
-                <h3>Test 1</h3>
-                <p>Test 1 info</p>
-            </div>
-            <div className='test'>
-                <h3>Test 2</h3>
-                <p>Test 2 info</p>
-            </div>
-            <div className='test'>
-                <h3>Test 3</h3>
-                <p>Test 3 info</p>
-            </div>
-            <div className='test'>
-                <h3>Test 4</h3>
-                <p>Test 4 info</p>
-            </div>
-            <div className='test'>
-                <h3>Test 4</h3>
-                <p>Test 4 info</p>
-            </div>
-            <div className='test'>
-                <h3>Test 4</h3>
-                <p>Test 4 info</p>
-            </div>
-            <div className='test'>
-                <h3>Test 4</h3>
-                <p>Test 4 info</p>
-            </div>
-            <div className='test'>
-                <h3>Test 4</h3>
-                <p>Test 4 info</p>
-            </div>
+            {
+                testState.map((name) => (
+                    <div class="test" key={name}>
+                        <h1>{name}</h1>
+                        <a href={`/api/downloadTest?test=${name}`}>Download {name}</a>
+                    </div>
+                ))
+            }
         </div>
     </div>);
 }
