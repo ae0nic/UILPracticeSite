@@ -21,36 +21,75 @@ hr {
     gap: 1vw;
     min-width: 100%;
     padding: 1vh 1vw;
-    
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
-@media (max-width: 1200px) {
+@media screen and (max-width: 1200px) {
     #body-text {
         display: grid;
         grid-template-columns: auto auto auto auto;
     }
+
+    #body-text .test h1 {
+        font-size: 1.5vw;
+    }
+    
 }
 
-@media (max-width: 800px) {
+@media screen and (max-width: 800px) {
     #body-text {
         display: grid;
         grid-template-columns: auto auto auto;
     }
+
+    #body-text .test h1 {
+        font-size: 2vw;
+    }
 }
 
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
     #body-text {
         display: grid;
         grid-template-columns: auto auto;
     }
+
+    #body-text .test h1 {
+        font-size: 2.5vw;
+    }
+}
+
+
+@media screen and (max-width: 300px) {
+    #body-text {
+        display: grid;
+        grid-template-columns: auto;
+    }
+
+    #body-text .test h1 {
+        font-size: 3vw;
+    }
+}
+
+#body-text .test h1 {
+    font-size: 1vw;
+    padding: 0;
+    margin: 0;
+    border: 0;
 }
 
 #body-text .test {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(30, 30, 30);
+    border: 0.2vmin solid white;
+    border-radius: 2vmin;
     min-width: 100%;
-    padding: 20%;
-    font-size: 30px;
+    padding: 2vh 5%;
+    font-size: 0.8vw;
     text-align: center;
 }
 
