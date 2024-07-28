@@ -8,7 +8,7 @@
 const path = require("node:path");
 const fs = require("node:fs");
 const testFolderPath = path.join(__dirname, "tests");
-const testFolder =fs.readdirSync(testFolderPath);
+let testFolder = fs.readdirSync(testFolderPath);
 
 const generators = require("./generators.js");
 
@@ -54,13 +54,21 @@ app.get("/api/generateQuestions", (req, res) => {
 })
 
 app.get("/api/getTests", (req, res) => {
-  let response = {};
+  let response = [];
+  testFolder = fs.readdirSync(testFolderPath); // I need to do this in case the tests in the directory change
   for (const file of testFolder) {
     let filePath = path.join(testFolderPath, file);
-    response[file] = fs.readFileSync(filePath).toString();
+    response.push(file);
   }
   console.log(response);
   res.json(response);
+})
+
+app.get("/api/downloadTest", (req, res) => {
+  let test = req.query.test;
+  if (fs.existsSync(`./server/tests/${test}`)) {
+    res.download(`./server/tests/${test}`);
+  }
 })
 
 app.listen(PORT, () => {
