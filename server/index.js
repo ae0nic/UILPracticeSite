@@ -33,9 +33,9 @@ function generateResponse(questions)
       let data = {};
       for (let i = 1; i <= numQuestions; i++)
       {
-        // data[i] = generators.generateBooleanLogicQuestion();
-        // data[i] = generatorsgenerateBaseMathQuestion();
-        data[i] = generators.generateMathQuestion();
+        data[i] = generators.generateBooleanLogicQuestion();
+        // data[i] = generators.generateBaseMathQuestion();
+        // data[i] = generators.generateMathQuestion();
         
       }
       toReturn["data"] = data;
@@ -54,20 +54,29 @@ app.get("/api/generateQuestions", (req, res) => {
 })
 
 app.get("/api/getTests", (req, res) => {
-  let response = [];
-  testFolder = fs.readdirSync(testFolderPath); // I need to do this in case the tests in the directory change
-  for (const file of testFolder) {
-    let filePath = path.join(testFolderPath, file);
-    response.push(file);
-  }
-  console.log(response);
-  res.json(response);
+  res.json(getTests(testFolderPath))
 })
+
+function getTests(folderPath) {
+  let response = [];
+  testFolder = fs.readdirSync(folderPath, {withFileTypes: true}); // I need to do this in case the tests in the directory change
+  for (const directoryObject of testFolder) {
+    if (directoryObject.isFile()) {
+      let filePath = path.join(folderPath, directoryObject.name);
+      response.push(directoryObject.name);
+    } else {
+      response.push({[directoryObject.name]: getTests(path.join(folderPath, directoryObject.name))})
+    }
+  }
+  return response;
+}
 
 app.get("/api/downloadTest", (req, res) => {
   let test = req.query.test;
-  if (fs.existsSync(`./server/tests/${test}`)) {
-    res.download(`./server/tests/${test}`);
+  if (fs.existsSync(`./tests/${test}`)) {
+    res.download(`./tests/${test}`);
+  } else {
+    res.json("Error alert!");
   }
 })
 

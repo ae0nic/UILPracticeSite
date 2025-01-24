@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "expr-eval": "^2.0.2",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "nodemon": "^3.1.9"
   }
 }
